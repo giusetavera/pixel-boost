@@ -1,120 +1,122 @@
 <p align="center">
-  <img src="assets/img/banner.png" alt="PixelBoost — Plugin per ChatGPT" width="100%">
+  <img src="assets/img/banner.png" alt="PixelBoost — ChatGPT plugin" width="100%">
 </p>
 
 <p align="center">
-  <strong>Il plugin per ChatGPT che trasforma le foto sfocate in immagini ad alta risoluzione.</strong><br>
-  Carichi la foto, PixelBoost fa il resto: niente prompt da scrivere, niente server, niente servizi esterni.
+  <strong>The ChatGPT plugin that turns blurry photos into high-resolution images.</strong><br>
+  Upload the photo and PixelBoost does the rest: no prompts to write, no servers, no external services.
 </p>
 
 ---
 
-## Perché
+## Why
 
-Rendere nitida una foto con un modello generativo è facile. Farlo **senza stravolgerla** no: il rischio è ritrovarsi con un volto diverso, una barba più folta, uno sfondo reinventato. **PixelBoost** è costruito per l'opposto:
+Sharpening a photo with a generative model is easy. Doing it **without changing the photo** is not: you can end up with a different face, a thicker beard or a reinvented background. **PixelBoost** is built to avoid that:
 
-- **Zero prompt.** Con il plugin attivo basta allegare un'immagine: parte da solo, senza chiedere conferme o preferenze.
-- **Fedele all'originale.** Migliora solo i dettagli già visibili. Identità, espressione, composizione, colori, luce e sfondo restano quelli della foto caricata.
-- **Nativo ChatGPT.** Usa la capacità di modifica immagini già integrata in ChatGPT. Nessuna API key, nessun MCP, nessun server.
-- **Onesto sui limiti.** Non dichiara dimensioni che non ha verificato e non spaccia una ricostruzione generativa per un recupero certo di dettagli reali.
+- **Zero prompts.** With the plugin active, just attach an image. It starts on its own, without asking for confirmation or preferences.
+- **Faithful to the original.** It enhances only details that are already visible. Identity, expression, composition, colours, lighting and background stay as they are in the uploaded photo.
+- **Native to ChatGPT.** It uses the image editing capability built into ChatGPT. No API keys, no MCP, no servers.
+- **Honest about its limits.** It never claims dimensions it hasn't verified, and it never passes off a generative reconstruction as a reliable recovery of real detail.
 
-## Cosa fa
+## What it does
 
-PixelBoost è un plugin con una sola skill, `pixel-boost`. Quando carichi un'immagine:
+PixelBoost is a plugin with a single skill, `pixel-boost`. When you upload an image, it:
 
-1. la prende come riferimento diretto della modifica (non la ridescrive per generarne una nuova);
-2. invia allo strumento immagini di ChatGPT il prompt **Ultra-Premium 16K Professional Remaster & Enhancement**, completo di negative prompt, senza riassumerlo né riscriverlo;
-3. chiede **una sola versione migliorata** alla massima qualità e risoluzione supportate, mantenendo orientamento, proporzioni e trasparenza;
-4. restituisce direttamente l'immagine, senza varianti, collage, confronti prima/dopo o filigrane.
+1. uses the image itself as the reference for the edit (it doesn't describe it and generate a new one);
+2. sends ChatGPT's image tool the **Ultra-Premium 16K Professional Remaster & Enhancement** prompt, negative prompt included, without summarising or rewriting it;
+3. requests **a single enhanced version** at the highest quality and resolution supported, keeping the original orientation, aspect ratio and transparency;
+4. returns the image directly, with no variants, collages, before/after comparisons or watermarks.
 
-Il prompt lavora su super-risoluzione, nitidezza naturale, riduzione di rumore e artefatti di compressione, rifinitura delle texture e micro-contrasto. Il negative prompt esclude esplicitamente cambi di identità o età, peli e pori inventati, pelle "di plastica", oversharpening, oggetti aggiunti e sfondi ridisegnati.
+The prompt covers super-resolution, natural sharpening, noise and compression-artifact removal, texture refinement and micro-contrast. The negative prompt explicitly rules out identity or age changes, invented hair and pores, plastic-looking skin, oversharpening, added objects and redesigned backgrounds.
 
-Funziona soprattutto con:
+It works best on:
 
-| Tipo di immagine | Cosa aspettarsi |
+| Image type | What to expect |
 |---|---|
-| **Foto sfocate o mosse** | Contorni più definiti e dettagli più leggibili, senza alterare soggetto e scena |
-| **Foto a bassa risoluzione o sgranate** | Upscaling con meno rumore e meno artefatti JPEG |
-| **Vecchie foto digitalizzate** | Più pulizia e nitidezza, mantenendo colori e luce originali |
-| **Illustrazioni, screenshot, loghi** | Più definizione nello **stile originale**: non vengono convertiti in fotografie, e testi e loghi esistenti restano com'erano |
+| **Blurry or shaky photos** | Sharper edges and more legible detail, without altering the subject or the scene |
+| **Low-resolution or grainy photos** | Upscaling with less noise and fewer JPEG artifacts |
+| **Scanned old photos** | Cleaner, sharper results that keep the original colours and lighting |
+| **Illustrations, screenshots, logos** | More definition in the **original style**: they are not turned into photographs, and existing text and logos stay as they were |
 
-Se alleghi più immagini, PixelBoost le elabora una per una, ciascuna col proprio riferimento, senza fonderle.
+If you attach several images, PixelBoost processes them one at a time, each with its own reference, and never merges them.
 
-## Installazione
+## Installation
 
-Il repository contiene due manifest con gli stessi metadati:
+The repository ships two manifests with the same metadata:
 
-- `plugin.json`: manifest nel formato [Agent Plugins](https://agent-plugins.org), con l'estensione `com.openai` per ChatGPT;
-- `.codex-plugin/plugin.json`: manifest per Codex / ChatGPT, che punta alla cartella `skills/`.
+- `plugin.json`: manifest in the [Agent Plugins](https://agent-plugins.org) format, with the `com.openai` extension for ChatGPT;
+- `.codex-plugin/plugin.json`: manifest for Codex / ChatGPT, pointing to the `skills/` folder.
 
-Clona il repository:
+Clone the repository:
 
 ```bash
 git clone https://gitlab.com/giusetavera/pixel-boost.git
 ```
 
-oppure crea uno ZIP pulito del plugin (il banner del README resta fuori dall'archivio):
+or build a clean ZIP of the plugin (the README banner is left out of the archive):
 
 ```bash
 git archive --format=zip --prefix=pixel-boost/ -o pixel-boost.zip HEAD
 ```
 
-Poi installa la cartella o lo ZIP seguendo la procedura per i plugin del tuo client ChatGPT / Codex. I nomi dei menu possono cambiare in base a piano e versione.
+Then install the folder or the ZIP following the plugin procedure of your ChatGPT / Codex client. Menu names may vary by plan and version.
 
-### Altri agenti
+### Other AI agents
 
-La skill segue il formato aperto **Agent Skills** (`SKILL.md` con front matter YAML), quindi qualsiasi agente compatibile può caricarla da `skills/pixel-boost/`. L'agente deve però avere uno strumento nativo di modifica immagini: PixelBoost non ne porta uno suo.
+The skill follows the open **Agent Skills** format (`SKILL.md` with YAML front matter), so any compatible agent can load it from `skills/pixel-boost/`. The agent must have a native image editing tool, though: PixelBoost doesn't bring its own.
 
-## Uso
+## Usage
 
-Attiva il plugin e **allega la foto**. Non serve scrivere nulla.
+Activate the plugin and **attach the photo**. You don't need to write anything.
 
-Se vuoi essere esplicito:
+If you want to be explicit:
 
-> Rendi nitida e ad alta risoluzione questa foto.
+> Make this photo sharp and high resolution.
 
-> Usa $pixel-boost su tutte e tre le immagini allegate.
+> Use $pixel-boost on all three attached images.
 
-Se nello stesso messaggio chiedi qualcos'altro (per esempio "descrivi questa foto" o "rimuovi lo sfondo"), PixelBoost rispetta la tua richiesta invece di avviare il miglioramento.
+If the same message asks for something else (for example "describe this photo" or "remove the background"), PixelBoost follows your request instead of running the enhancement.
 
-Consigli:
+The skill's instructions and default prompts are in Italian, but you can talk to it in any language.
 
-- **Carica l'originale.** Più pixel e meno compressione ci sono in partenza, più il risultato resta fedele. Evita gli screenshot di una foto se hai il file.
-- **Una foto, un risultato.** PixelBoost non rigenera da solo altre versioni "più spettacolari". Se il risultato non ti convince, chiedi esplicitamente un nuovo tentativo.
+Tips:
 
-## Struttura del repository
+- **Upload the original.** The more pixels and the less compression you start with, the more faithful the result. Avoid screenshots of a photo if you have the file.
+- **One photo, one result.** PixelBoost doesn't generate extra "more spectacular" versions on its own. If you don't like the result, ask for another attempt explicitly.
+
+## Repository structure
 
 ```
 pixel-boost/
-├── plugin.json                     # manifest Agent Plugins + estensione com.openai
+├── plugin.json                     # Agent Plugins manifest + com.openai extension
 ├── .codex-plugin/
-│   └── plugin.json                 # manifest Codex / ChatGPT
+│   └── plugin.json                 # Codex / ChatGPT manifest
 ├── skills/
 │   └── pixel-boost/
-│       ├── SKILL.md                # istruzioni operative + prompt da trasmettere integralmente
+│       ├── SKILL.md                # operating instructions + prompt passed verbatim
 │       └── agents/
-│           └── openai.yaml         # nome, descrizione e prompt di default per l'interfaccia
+│           └── openai.yaml         # display name, description and default prompt
 └── assets/
     └── img/
-        ├── icon.png                # logo e icona del composer (512×512)
-        └── banner.png              # artwork del README (escluso dallo ZIP)
+        ├── icon.png                # logo and composer icon (512×512)
+        └── banner.png              # README artwork (excluded from the ZIP)
 ```
 
-**`SKILL.md`** contiene tutto il comportamento del plugin: quando attivarsi, come scegliere l'immagine, cosa non fare e il prompt inglese da passare **parola per parola** allo strumento immagini. Se vuoi cambiare lo stile del risultato, è il prompt in fondo a questo file che devi modificare.
+**`SKILL.md`** holds all of the plugin's behaviour: when to trigger, how to pick the image, what not to do, and the English prompt passed **word for word** to the image tool. To change the style of the result, edit the prompt at the bottom of that file.
 
-Se modifichi nome, descrizioni o versione, aggiorna **entrambi** i manifest: devono restare allineati.
+If you change the name, descriptions or version, update **both** manifests: they must stay in sync.
 
-## Limiti, onestamente
+## Limits, honestly
 
-- La qualità finale dipende dallo strumento immagini di ChatGPT disponibile nel tuo account. "16K" nel prompt è un obiettivo di qualità, non una garanzia di dimensioni native: PixelBoost dichiara una risoluzione solo se la verifica nell'output.
-- I dettagli che nella foto non ci sono non si possono recuperare davvero. Su immagini molto degradate il modello **ricostruisce**, e una ricostruzione può essere plausibile ma sbagliata.
-- Per usi in cui conta l'autenticità (documenti, prove, archivi storici, perizie), tratta il risultato come una versione migliorata a scopo di visione, non come l'originale.
-- Se la modifica immagini nativa non è disponibile o restituisce un errore, PixelBoost lo dice. Non finge un risultato e non passa a servizi esterni.
+- The final quality depends on the ChatGPT image tool available on your account. "16K" in the prompt is a quality target, not a guarantee of native dimensions: PixelBoost states a resolution only after verifying it in the output.
+- Detail that isn't in the photo can't truly be recovered. On heavily degraded images the model **reconstructs**, and a reconstruction can be plausible yet wrong.
+- Where authenticity matters (documents, evidence, historical archives, forensic work), treat the result as an enhanced viewing copy, not as the original.
+- If native image editing is unavailable or returns an error, PixelBoost says so. It doesn't fake a result or fall back to external services.
 
-## Versioni
+## Changelog
 
-**1.0.0**: prima versione di PixelBoost, erede del plugin legacy *HD Photo Remaster* (`hd-photo-remaster`). Nuovo nome, nuova identità visiva e skill riorientata sulla trasformazione di foto sfocate in immagini ad alta risoluzione.
+**1.0.0**: first release of PixelBoost, successor to the legacy *HD Photo Remaster* plugin (`hd-photo-remaster`). New name, new visual identity, and a skill refocused on turning blurry photos into high-resolution images.
 
-## Autore
+## Author
 
-Sviluppato da **Giuseppe Tavera** · [giuseppetavera.it](https://giuseppetavera.it). Feedback, segnalazioni e merge request sono benvenuti.
+Developed by **Giuseppe Tavera** · [giuseppetavera.it](https://giuseppetavera.it). Feedback, issues and merge requests are welcome.
