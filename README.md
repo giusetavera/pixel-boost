@@ -77,7 +77,7 @@ If you want to be explicit:
 
 If the same message asks for something else (for example "describe this photo" or "remove the background"), PixelBoost follows your request instead of running the enhancement.
 
-The skill's instructions and default prompts are in Italian, but you can talk to it in any language.
+PixelBoost replies in the language you write in.
 
 Tips:
 

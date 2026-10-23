@@ -4,16 +4,16 @@
     "email": "giuse.tavera@gmail.com",
     "name": "Giuseppe Tavera"
   },
-  "description": "Trasforma le foto sfocate o a bassa risoluzione in immagini nitide ad alta risoluzione, preservando fedelmente l'originale, mediante la capacità nativa di modifica immagini di ChatGPT. Una sola skill, senza server o servizi esterni.",
+  "description": "Turns blurry or low-resolution photos into sharp, high-resolution images while faithfully preserving the original, using ChatGPT's native image editing. A single skill, with no servers or external services.",
   "extensions": {
     "com.openai": {
       "interface": {
         "category": "Productivity",
-        "defaultPrompt": "Rendi nitida e ad alta risoluzione la foto allegata, preservando fedelmente l'originale.",
+        "defaultPrompt": "Make the attached photo sharp and high resolution, faithfully preserving the original.",
         "developerName": "Giuseppe Tavera",
         "displayName": "PixelBoost",
-        "longDescription": "Carica una foto sfocata, sgranata o a bassa risoluzione con PixelBoost attivo: il plugin applica automaticamente il prompt Ultra-Premium 16K Professional Remaster & Enhancement e restituisce una versione più nitida e definita. Preserva contenuti, identità, composizione, colori, luce e sfondo; privilegia la fedeltà rispetto ai dettagli inventati. Usa la massima qualità e risoluzione supportata dallo strumento immagini disponibile; il riferimento 16K nel prompt non garantisce dimensioni 16K native o il recupero di informazioni assenti.",
-        "shortDescription": "Da foto sfocata ad alta risoluzione",
+        "longDescription": "Upload a blurry, grainy or low-resolution photo with PixelBoost active: the plugin automatically applies the Ultra-Premium 16K Professional Remaster & Enhancement prompt and returns a sharper, more detailed version. It preserves content, identity, composition, colors, lighting and background, and favors fidelity over invented detail. It uses the highest quality and resolution supported by the available image tool; the 16K reference in the prompt does not guarantee native 16K dimensions or the recovery of missing information.",
+        "shortDescription": "From blurry photo to high resolution",
         "websiteURL": "https://giuseppetavera.it",
         "logo": "./assets/img/icon.png",
         "composerIcon": "./assets/img/icon.png"

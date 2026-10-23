@@ -1,4 +1,4 @@
 interface:
   display_name: "PixelBoost"
-  short_description: "Da foto sfocata ad alta risoluzione"
-  default_prompt: "Usa $pixel-boost per rendere nitida e ad alta risoluzione qualsiasi immagine allegata."
+  short_description: "From blurry photo to high resolution"
+  default_prompt: "Use $pixel-boost to make any attached image sharp and high resolution."
