@@ -1,0 +1,4 @@
+# Keep the plugin ZIP lean (git archive)
+assets/img/banner.png export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore

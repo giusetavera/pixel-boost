@@ -1,4 +1,0 @@
-interface:
-  display_name: "HD Photo Remaster"
-  short_description: "Restauro fotografico fedele in HD"
-  default_prompt: "Usa $hd-photo-remaster per restaurare direttamente qualsiasi immagine allegata."

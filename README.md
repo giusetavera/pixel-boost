@@ -1,93 +1,120 @@
-# pixel-boost
+<p align="center">
+  <img src="assets/img/banner.png" alt="PixelBoost — Plugin per ChatGPT" width="100%">
+</p>
 
+<p align="center">
+  <strong>Il plugin per ChatGPT che trasforma le foto sfocate in immagini ad alta risoluzione.</strong><br>
+  Carichi la foto, PixelBoost fa il resto: niente prompt da scrivere, niente server, niente servizi esterni.
+</p>
 
+---
 
-## Getting started
+## Perché
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Rendere nitida una foto con un modello generativo è facile. Farlo **senza stravolgerla** no: il rischio è ritrovarsi con un volto diverso, una barba più folta, uno sfondo reinventato. **PixelBoost** è costruito per l'opposto:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- **Zero prompt.** Con il plugin attivo basta allegare un'immagine: parte da solo, senza chiedere conferme o preferenze.
+- **Fedele all'originale.** Migliora solo i dettagli già visibili. Identità, espressione, composizione, colori, luce e sfondo restano quelli della foto caricata.
+- **Nativo ChatGPT.** Usa la capacità di modifica immagini già integrata in ChatGPT. Nessuna API key, nessun MCP, nessun server.
+- **Onesto sui limiti.** Non dichiara dimensioni che non ha verificato e non spaccia una ricostruzione generativa per un recupero certo di dettagli reali.
 
-## Add your files
+## Cosa fa
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+PixelBoost è un plugin con una sola skill, `pixel-boost`. Quando carichi un'immagine:
+
+1. la prende come riferimento diretto della modifica (non la ridescrive per generarne una nuova);
+2. invia allo strumento immagini di ChatGPT il prompt **Ultra-Premium 16K Professional Remaster & Enhancement**, completo di negative prompt, senza riassumerlo né riscriverlo;
+3. chiede **una sola versione migliorata** alla massima qualità e risoluzione supportate, mantenendo orientamento, proporzioni e trasparenza;
+4. restituisce direttamente l'immagine, senza varianti, collage, confronti prima/dopo o filigrane.
+
+Il prompt lavora su super-risoluzione, nitidezza naturale, riduzione di rumore e artefatti di compressione, rifinitura delle texture e micro-contrasto. Il negative prompt esclude esplicitamente cambi di identità o età, peli e pori inventati, pelle "di plastica", oversharpening, oggetti aggiunti e sfondi ridisegnati.
+
+Funziona soprattutto con:
+
+| Tipo di immagine | Cosa aspettarsi |
+|---|---|
+| **Foto sfocate o mosse** | Contorni più definiti e dettagli più leggibili, senza alterare soggetto e scena |
+| **Foto a bassa risoluzione o sgranate** | Upscaling con meno rumore e meno artefatti JPEG |
+| **Vecchie foto digitalizzate** | Più pulizia e nitidezza, mantenendo colori e luce originali |
+| **Illustrazioni, screenshot, loghi** | Più definizione nello **stile originale**: non vengono convertiti in fotografie, e testi e loghi esistenti restano com'erano |
+
+Se alleghi più immagini, PixelBoost le elabora una per una, ciascuna col proprio riferimento, senza fonderle.
+
+## Installazione
+
+Il repository contiene due manifest con gli stessi metadati:
+
+- `plugin.json`: manifest nel formato [Agent Plugins](https://agent-plugins.org), con l'estensione `com.openai` per ChatGPT;
+- `.codex-plugin/plugin.json`: manifest per Codex / ChatGPT, che punta alla cartella `skills/`.
+
+Clona il repository:
+
+```bash
+git clone https://gitlab.com/giusetavera/pixel-boost.git
+```
+
+oppure crea uno ZIP pulito del plugin (il banner del README resta fuori dall'archivio):
+
+```bash
+git archive --format=zip --prefix=pixel-boost/ -o pixel-boost.zip HEAD
+```
+
+Poi installa la cartella o lo ZIP seguendo la procedura per i plugin del tuo client ChatGPT / Codex. I nomi dei menu possono cambiare in base a piano e versione.
+
+### Altri agenti
+
+La skill segue il formato aperto **Agent Skills** (`SKILL.md` con front matter YAML), quindi qualsiasi agente compatibile può caricarla da `skills/pixel-boost/`. L'agente deve però avere uno strumento nativo di modifica immagini: PixelBoost non ne porta uno suo.
+
+## Uso
+
+Attiva il plugin e **allega la foto**. Non serve scrivere nulla.
+
+Se vuoi essere esplicito:
+
+> Rendi nitida e ad alta risoluzione questa foto.
+
+> Usa $pixel-boost su tutte e tre le immagini allegate.
+
+Se nello stesso messaggio chiedi qualcos'altro (per esempio "descrivi questa foto" o "rimuovi lo sfondo"), PixelBoost rispetta la tua richiesta invece di avviare il miglioramento.
+
+Consigli:
+
+- **Carica l'originale.** Più pixel e meno compressione ci sono in partenza, più il risultato resta fedele. Evita gli screenshot di una foto se hai il file.
+- **Una foto, un risultato.** PixelBoost non rigenera da solo altre versioni "più spettacolari". Se il risultato non ti convince, chiedi esplicitamente un nuovo tentativo.
+
+## Struttura del repository
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/giusetavera/pixel-boost.git
-git branch -M main
-git push -uf origin main
+pixel-boost/
+├── plugin.json                     # manifest Agent Plugins + estensione com.openai
+├── .codex-plugin/
+│   └── plugin.json                 # manifest Codex / ChatGPT
+├── skills/
+│   └── pixel-boost/
+│       ├── SKILL.md                # istruzioni operative + prompt da trasmettere integralmente
+│       └── agents/
+│           └── openai.yaml         # nome, descrizione e prompt di default per l'interfaccia
+└── assets/
+    └── img/
+        ├── icon.png                # logo e icona del composer (512×512)
+        └── banner.png              # artwork del README (escluso dallo ZIP)
 ```
 
-## Integrate with your tools
+**`SKILL.md`** contiene tutto il comportamento del plugin: quando attivarsi, come scegliere l'immagine, cosa non fare e il prompt inglese da passare **parola per parola** allo strumento immagini. Se vuoi cambiare lo stile del risultato, è il prompt in fondo a questo file che devi modificare.
 
-* [Set up project integrations](https://gitlab.com/giusetavera/pixel-boost/-/settings/integrations)
+Se modifichi nome, descrizioni o versione, aggiorna **entrambi** i manifest: devono restare allineati.
 
-## Collaborate with your team
+## Limiti, onestamente
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+- La qualità finale dipende dallo strumento immagini di ChatGPT disponibile nel tuo account. "16K" nel prompt è un obiettivo di qualità, non una garanzia di dimensioni native: PixelBoost dichiara una risoluzione solo se la verifica nell'output.
+- I dettagli che nella foto non ci sono non si possono recuperare davvero. Su immagini molto degradate il modello **ricostruisce**, e una ricostruzione può essere plausibile ma sbagliata.
+- Per usi in cui conta l'autenticità (documenti, prove, archivi storici, perizie), tratta il risultato come una versione migliorata a scopo di visione, non come l'originale.
+- Se la modifica immagini nativa non è disponibile o restituisce un errore, PixelBoost lo dice. Non finge un risultato e non passa a servizi esterni.
 
-## Test and Deploy
+## Versioni
 
-Use the built-in continuous integration in GitLab.
+**1.0.0**: prima versione di PixelBoost, erede del plugin legacy *HD Photo Remaster* (`hd-photo-remaster`). Nuovo nome, nuova identità visiva e skill riorientata sulla trasformazione di foto sfocate in immagini ad alta risoluzione.
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+## Autore
 
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Sviluppato da **Giuseppe Tavera** · [giuseppetavera.it](https://giuseppetavera.it). Feedback, segnalazioni e merge request sono benvenuti.

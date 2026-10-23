@@ -1,23 +1,23 @@
 {
   "interface": {
     "category": "Productivity",
-    "defaultPrompt": "Restaura direttamente la fotografia allegata preservando fedelmente l'originale.",
+    "defaultPrompt": "Rendi nitida e ad alta risoluzione la foto allegata, preservando fedelmente l'originale.",
     "developerName": "Giuseppe Tavera",
-    "displayName": "HD Photo Remaster",
-    "longDescription": "Carica qualsiasi immagine con il plugin attivo per applicare automaticamente il prompt Ultra-Premium 16K Professional Remaster & Enhancement. Preserva contenuti, identit\u00e0, composizione, colori, luce e sfondo; privilegia la fedelt\u00e0 rispetto ai dettagli inventati. Usa la massima qualit\u00e0 e risoluzione supportata dallo strumento immagini disponibile; il riferimento 16K nel prompt non garantisce dimensioni 16K native o il recupero di informazioni assenti.",
-    "shortDescription": "Restauro fotografico fedele",
+    "displayName": "PixelBoost",
+    "longDescription": "Carica una foto sfocata, sgranata o a bassa risoluzione con PixelBoost attivo: il plugin applica automaticamente il prompt Ultra-Premium 16K Professional Remaster & Enhancement e restituisce una versione più nitida e definita. Preserva contenuti, identità, composizione, colori, luce e sfondo; privilegia la fedeltà rispetto ai dettagli inventati. Usa la massima qualità e risoluzione supportata dallo strumento immagini disponibile; il riferimento 16K nel prompt non garantisce dimensioni 16K native o il recupero di informazioni assenti.",
+    "shortDescription": "Da foto sfocata ad alta risoluzione",
     "websiteURL": "https://giuseppetavera.it",
-    "logo": "./assets/giuseppetavera-hd-restore-img-plugin.jpg",
-    "composerIcon": "./assets/giuseppetavera-hd-restore-img-plugin.jpg",
+    "logo": "./assets/img/icon.png",
+    "composerIcon": "./assets/img/icon.png",
     "capabilities": []
   },
-  "name": "hd-photo-remaster",
-  "version": "1.0.3",
-  "description": "Restauro automatico e conservativo di qualsiasi immagine caricata mediante la capacit\u00e0 nativa di modifica immagini di ChatGPT. Una sola skill, senza server o servizi esterni.",
+  "name": "pixel-boost",
+  "version": "1.0.0",
+  "description": "Trasforma le foto sfocate o a bassa risoluzione in immagini nitide ad alta risoluzione, preservando fedelmente l'originale, mediante la capacità nativa di modifica immagini di ChatGPT. Una sola skill, senza server o servizi esterni.",
   "author": {
     "name": "Giuseppe Tavera",
     "email": "giuse.tavera@gmail.com"
   },
-  "keywords": [],
+  "keywords": ["image", "upscale", "super-resolution", "deblur", "photo-restoration", "chatgpt"],
   "skills": "./skills"
 }
