@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "giuse.tavera@gmail.com",
+    "name": "Giuseppe Tavera"
+  },
+  "description": "Restauro automatico e conservativo di qualsiasi immagine caricata mediante la capacità nativa di modifica immagini di ChatGPT. Una sola skill, senza server o servizi esterni.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "category": "Productivity",
+        "defaultPrompt": "Restaura direttamente la fotografia allegata preservando fedelmente l'originale.",
+        "developerName": "Giuseppe Tavera",
+        "displayName": "HD Photo Remaster",
+        "longDescription": "Carica qualsiasi immagine con il plugin attivo per applicare automaticamente il prompt Ultra-Premium 16K Professional Remaster & Enhancement. Preserva contenuti, identità, composizione, colori, luce e sfondo; privilegia la fedeltà rispetto ai dettagli inventati. Usa la massima qualità e risoluzione supportata dallo strumento immagini disponibile; il riferimento 16K nel prompt non garantisce dimensioni 16K native o il recupero di informazioni assenti.",
+        "shortDescription": "Restauro fotografico fedele",
+        "websiteURL": "https://giuseppetavera.it",
+        "logo": "./assets/giuseppetavera-hd-restore-img-plugin.jpg",
+        "composerIcon": "./assets/giuseppetavera-hd-restore-img-plugin.jpg"
+      }
+    }
+  },
+  "name": "hd-photo-remaster",
+  "version": "1.0.3"
+}
