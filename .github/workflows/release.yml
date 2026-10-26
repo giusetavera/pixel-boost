@@ -1,0 +1,67 @@
+# Creates a GitHub release when the version in the manifests changes.
+# main is pushed here by the GitLab mirror; a push that keeps the same
+# version is a no-op, so bump "version" in both manifests to release.
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version
+        id: version
+        run: |
+          root=$(jq -r .version plugin.json)
+          codex=$(jq -r .version .codex-plugin/plugin.json)
+          if [ "$root" != "$codex" ]; then
+            echo "::error::Version mismatch: plugin.json=$root, .codex-plugin/plugin.json=$codex"
+            exit 1
+          fi
+          echo "version=$root" >> "$GITHUB_OUTPUT"
+          echo "tag=v$root" >> "$GITHUB_OUTPUT"
+
+      - name: Check if already released
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, nothing to do."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build plugin ZIP
+        if: steps.check.outputs.skip == 'false'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: git archive --format=zip --prefix=pixel-boost/ -o "pixel-boost-$VERSION.zip" HEAD
+
+      - name: Create release
+        if: steps.check.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release create "$TAG" "pixel-boost-$VERSION.zip" \
+            --target "$GITHUB_SHA" \
+            --title "PixelBoost $VERSION" \
+            --generate-notes

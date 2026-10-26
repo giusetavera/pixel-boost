@@ -47,13 +47,15 @@ The repository ships two manifests with the same metadata:
 - `plugin.json`: manifest in the [Agent Plugins](https://agent-plugins.org) format, with the `com.openai` extension for ChatGPT;
 - `.codex-plugin/plugin.json`: manifest for Codex / ChatGPT, pointing to the `skills/` folder.
 
-Clone the repository:
+Download `pixel-boost-<version>.zip` from the [latest release](https://github.com/giusetavera/pixel-boost/releases/latest): it's the plugin, ready to install.
+
+Or clone the repository:
 
 ```bash
-git clone https://gitlab.com/giusetavera/pixel-boost.git
+git clone https://github.com/giusetavera/pixel-boost.git
 ```
 
-or build a clean ZIP of the plugin (the README banner is left out of the archive):
+and build the same ZIP yourself (the README banner is left out of the archive):
 
 ```bash
 git archive --format=zip --prefix=pixel-boost/ -o pixel-boost.zip HEAD
@@ -106,6 +108,10 @@ pixel-boost/
 
 If you change the name, descriptions or version, update **both** manifests: they must stay in sync.
 
+### Releasing
+
+Development happens on GitLab, which mirrors `main` to GitHub. On every push to `main`, the [release workflow](.github/workflows/release.yml) on GitHub reads `version` from the manifests: if no release exists for it yet, it creates the `v<version>` tag, a GitHub release with generated notes and the plugin ZIP attached. Otherwise it does nothing. To publish a new version, bump `version` in both manifests and push to `main`.
+
 ## Limits, honestly
 
 - The final quality depends on the ChatGPT image tool available on your account. "16K" in the prompt is a quality target, not a guarantee of native dimensions: PixelBoost states a resolution only after verifying it in the output.
@@ -119,4 +125,4 @@ If you change the name, descriptions or version, update **both** manifests: they
 
 ## Author
 
-Developed by **Giuseppe Tavera** · [giuseppetavera.it](https://giuseppetavera.it). Feedback, issues and merge requests are welcome.
+Developed by **Giuseppe Tavera** · [giuseppetavera.it](https://giuseppetavera.it). Feedback, issues and pull requests are welcome on [GitHub](https://github.com/giusetavera/pixel-boost).
