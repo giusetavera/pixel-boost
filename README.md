@@ -9,6 +9,21 @@
 
 ---
 
+## Contents
+
+- [Why](#why)
+- [What it does](#what-it-does)
+- [Installation](#installation)
+  - [ChatGPT](#chatgpt)
+  - [Codex CLI](#codex-cli)
+  - [Other AI agents](#other-ai-agents)
+- [Usage](#usage)
+- [Repository structure](#repository-structure)
+  - [Releasing](#releasing)
+- [Limits, honestly](#limits-honestly)
+- [Changelog](#changelog)
+- [Author](#author)
+
 ## Why
 
 Sharpening a photo with a generative model is easy. Doing it **without changing the photo** is not: you can end up with a different face, a thicker beard or a reinvented background. **PixelBoost** is built to avoid that:
