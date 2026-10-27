@@ -13,13 +13,22 @@
         "developerName": "Giuseppe Tavera",
         "displayName": "PixelBoost",
         "longDescription": "Upload a blurry, grainy or low-resolution photo with PixelBoost active: the plugin automatically applies the Ultra-Premium 16K Professional Remaster & Enhancement prompt and returns a sharper, more detailed version. It preserves content, identity, composition, colors, lighting and background, and favors fidelity over invented detail. It uses the highest quality and resolution supported by the available image tool; the 16K reference in the prompt does not guarantee native 16K dimensions or the recovery of missing information.",
-        "shortDescription": "From blurry photo to high resolution",
+        "shortDescription": "Turn blurry photos into HD",
         "websiteURL": "https://giuseppetavera.it",
         "logo": "./assets/img/icon.png",
-        "composerIcon": "./assets/img/icon.png"
+        "composerIcon": "./assets/img/icon.png",
+        "supportURL": "https://github.com/giusetavera/pixel-boost/issues",
+        "privacyPolicyURL": "https://github.com/giusetavera/pixel-boost/blob/main/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/giusetavera/pixel-boost/blob/main/TERMS.md",
+        "capabilities": [
+          "Sharpen blurry photos",
+          "Upscale low-resolution images",
+          "Reduce noise and compression artifacts"
+        ]
       }
     }
   },
   "name": "pixel-boost",
-  "version": "1.0.0"
+  "version": "1.0.1",
+  "repository": "https://github.com/giusetavera/pixel-boost"
 }

@@ -91,6 +91,8 @@ Tips:
 ```
 pixel-boost/
 ├── plugin.json                     # Agent Plugins manifest + com.openai extension
+├── PRIVACY.md                      # privacy policy (linked from the listing)
+├── TERMS.md                        # terms of use (linked from the listing)
 ├── .codex-plugin/
 │   └── plugin.json                 # Codex / ChatGPT manifest
 ├── skills/
@@ -121,8 +123,12 @@ Development happens on GitLab, which mirrors `main` to GitHub. On every push to 
 
 ## Changelog
 
+**1.0.1**: listing metadata for the ChatGPT plugin directory: shorter subtitle, capabilities, support, privacy policy and terms of service links.
+
 **1.0.0**: first release of PixelBoost, successor to the legacy *HD Photo Remaster* plugin (`hd-photo-remaster`). New name, new visual identity, and a skill refocused on turning blurry photos into high-resolution images.
 
 ## Author
 
-Developed by **Giuseppe Tavera** · [giuseppetavera.it](https://giuseppetavera.it). Feedback, issues and pull requests are welcome on [GitHub](https://github.com/giusetavera/pixel-boost).
+Developed by **Giuseppe Tavera** · [giuseppetavera.it](https://giuseppetavera.it). Feedback, issues and pull requests are welcome on [GitHub](https://github.com/giusetavera/pixel-boost/issues).
+
+See also the [privacy policy](PRIVACY.md) and the [terms of use](TERMS.md).
