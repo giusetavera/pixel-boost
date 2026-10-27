@@ -3,3 +3,6 @@ assets/img/banner.png export-ignore
 .gitignore export-ignore
 .gitattributes export-ignore
 .github export-ignore
+assets/img/install-codex.png export-ignore
+.agents export-ignore
+assets/img/install-chatgpt.png export-ignore

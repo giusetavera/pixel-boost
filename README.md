@@ -42,26 +42,43 @@ If you attach several images, PixelBoost processes them one at a time, each with
 
 ## Installation
 
-The repository ships two manifests with the same metadata:
+PixelBoost isn't in the public ChatGPT plugin directory yet. Until it is, you can install it on your own account in a minute.
 
-- `plugin.json`: manifest in the [Agent Plugins](https://agent-plugins.org) format, with the `com.openai` extension for ChatGPT;
-- `.codex-plugin/plugin.json`: manifest for Codex / ChatGPT, pointing to the `skills/` folder.
+### ChatGPT
 
-Download `pixel-boost-<version>.zip` from the [latest release](https://github.com/giusetavera/pixel-boost/releases/latest): it's the plugin, ready to install.
+1. Download `pixel-boost-<version>.zip` from the [latest release](https://github.com/giusetavera/pixel-boost/releases/latest). Don't unzip it.
+2. Sign in to [ChatGPT](https://chatgpt.com) and open **Plugins** from the left sidebar.
+3. Click **Add** in the top right.
+4. Choose the option to upload a plugin archive and select the ZIP you downloaded.
 
-Or clone the repository:
+<p align="center">
+  <img src="assets/img/install-chatgpt.png" alt="ChatGPT: Plugins, then Add, then upload the plugin archive" width="100%"><br>
+  <sub>The screenshot shows the Italian interface: <em>Plugin</em> → <em>Aggiungi</em> → <em>Carica l'archivio del plugin</em>. Labels follow your ChatGPT language.</sub>
+</p>
+
+That's it: PixelBoost is now installed on your account. Start a new chat and attach a photo, or type `@` and pick PixelBoost to call it explicitly (see [Usage](#usage)).
+
+To update it, download the ZIP of the new release and upload it the same way.
+
+### Codex CLI
+
+This repository is also a plugin marketplace, so Codex can install PixelBoost straight from GitHub:
 
 ```bash
-git clone https://github.com/giusetavera/pixel-boost.git
+codex plugin marketplace add giusetavera/pixel-boost
+codex plugin add pixel-boost@pixel-boost
 ```
 
-and build the same ZIP yourself (the README banner is left out of the archive):
+<p align="center">
+  <img src="assets/img/install-codex.png" alt="Installing PixelBoost with the Codex CLI" width="100%">
+</p>
+
+Run `codex plugin list` to check that it shows `installed, enabled`. To uninstall it:
 
 ```bash
-git archive --format=zip --prefix=pixel-boost/ -o pixel-boost.zip HEAD
+codex plugin remove pixel-boost@pixel-boost
+codex plugin marketplace remove pixel-boost
 ```
-
-Then install the folder or the ZIP following the plugin procedure of your ChatGPT / Codex client. Menu names may vary by plan and version.
 
 ### Other AI agents
 
@@ -95,6 +112,8 @@ pixel-boost/
 ├── TERMS.md                        # terms of use (linked from the listing)
 ├── .codex-plugin/
 │   └── plugin.json                 # Codex / ChatGPT manifest
+├── .agents/plugins/
+│   └── marketplace.json            # lets Codex install the plugin from this repo
 ├── skills/
 │   └── pixel-boost/
 │       ├── SKILL.md                # operating instructions + prompt passed verbatim
@@ -103,7 +122,9 @@ pixel-boost/
 └── assets/
     └── img/
         ├── icon.png                # logo and composer icon (512×512)
-        └── banner.png              # README artwork (excluded from the ZIP)
+        ├── banner.png              # README artwork (excluded from the ZIP)
+        ├── install-chatgpt.png     # README artwork (excluded from the ZIP)
+        └── install-codex.png       # README artwork (excluded from the ZIP)
 ```
 
 **`SKILL.md`** holds all of the plugin's behaviour: when to trigger, how to pick the image, what not to do, and the English prompt passed **word for word** to the image tool. To change the style of the result, edit the prompt at the bottom of that file.
